@@ -27,13 +27,17 @@ def get_stock_for_all_products():
     results = session.query(
         Stock.product_id,
         Stock.quantity,
-    ).all()
+        Product.sku,
+        Product.name,
+        Product.price,
+    ).join(Product, Stock.product_id == Product.id).all()
     stock_data = []
     for row in results:
         stock_data.append({
             'Article': row.product_id,
-            'Numéro SKU': '',
-            'Prix unitaire': 0,
+            'Numéro SKU': row.sku,
+            'Nom de l\'article': row.name,
+            'Prix unitaire': row.price,
             'Unités en stock': int(row.quantity),
         })
     

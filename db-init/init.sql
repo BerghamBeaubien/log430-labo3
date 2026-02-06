@@ -45,14 +45,13 @@ CREATE TABLE order_items (
 
 -- Product stocks 
 -- ATTENTION: Veuillez créer cette table manuellement dans le cadre des activités
-/* 
+-- Commentaire enlevé pour ne pas refaire l'activité lorsque le conteneur est recréé
 DROP TABLE IF EXISTS stocks;
 CREATE TABLE stocks (
-    product_id INT PRIMARY KEY,
+    product_id INT NOT NULL PRIMARY KEY,
     quantity INT NOT NULL DEFAULT 0,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE RESTRICT
 );
-*/
 
 -- Mock data: users
 INSERT INTO users (name, email) VALUES
@@ -66,3 +65,10 @@ INSERT INTO products (name, sku, price) VALUES
 ('Keyboard DEF', 'KB67890', 59.50),
 ('Gadget XYZ', 'GG12345', 5.75),
 ('27-inch Screen WYZ', 'SC27289', 299.75);
+
+-- Mock data: stocks
+INSERT INTO stocks (product_id, quantity) VALUES
+(1, 1000),
+(2, 500),
+(3, 2),
+(4, 90);
